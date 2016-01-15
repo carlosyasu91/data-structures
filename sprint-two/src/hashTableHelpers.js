@@ -57,3 +57,5 @@ var getIndexBelowMaxForKey = function(str, max) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+ // The above functions are all constant (O(1)) except for LimitedArray.each and getIndexBelowMaxKey, which are linear (O(n))
