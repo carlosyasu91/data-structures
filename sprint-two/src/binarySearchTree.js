@@ -10,7 +10,19 @@ var BinarySearchTree = function(value) {
 };
 
 BinarySearchTree.prototype.insert = function(value){
-
+  if (value > this.value) {
+    if(!this.right){
+      this.right = BinarySearchTree(value);
+    } else {
+      this.right.insert(value);
+    }
+  } else {
+    if(!this.left){
+      this.left = BinarySearchTree(value);
+    } else {
+      this.left.insert(value);
+    }  
+  }
 };
 
 BinarySearchTree.prototype.contains = function(value){
