@@ -29,3 +29,5 @@ treeMethods.contains = function(target) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+// addChild is constant (O(1)), contains is linear (O(n))

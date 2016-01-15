@@ -81,4 +81,14 @@ Graph.prototype.forEachNode = function(cb) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ * 
+ * findVertice: linear time complexity O(n)
+ * addNode: constant O(1)
+ * contains: linear time complexity
+ * removeNode: linear time complexity
+ * hasEdge: linear time complexity
+ * addEdge: linear time complexity
+ * removeEdge: linear time complexity
+ * forEachNode: linear time complexity
  */
+ 
