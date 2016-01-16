@@ -59,4 +59,17 @@ describe('tree', function() {
     expect(tree.children[0].contains(7)).to.equal(false);
   });
 
+  it('should execute a callback on each element with .traverse', function(){
+    tree.addChild(3);
+    tree.addChild(2);
+    tree.addChild(5);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+    tree.children[0].addChild(6);
+    var array = [];
+    var func = function(tree){ array.push(tree.value); };
+    tree.traverse(func);
+    expect(array).to.eql([undefined, 3, 7, 6, 2, 8, 5]);
+  });
+
 });

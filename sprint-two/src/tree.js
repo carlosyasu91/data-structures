@@ -1,8 +1,8 @@
 var Tree = function(value, parent, key) {
   var newTree = {};
   newTree.value = value;
-  newTree.parent = (parent || undefined);
-  newTree.key = (key !== undefined) ? key : undefined;
+  newTree.parent = parent;
+  newTree.key = key;
 
   newTree.children = [];
 
@@ -32,12 +32,22 @@ treeMethods.removeFromParent = function() {
   this.parent = undefined;
 }; 
 
+treeMethods.traverse = function (callback) {
+  callback(this);
+  if(this.children){
+    this.children.forEach(function(child){
+      child.traverse(callback);
+    });
+  }
+};
+
 /*
  * Complexity: What is the time complexity of the above functions?
  */
 
-/* addChild is constant (O(1)), contains is linear (O(n))
+/* addChild is constant (O(1)), contains is sub-linear (T(n) = O(n)), traverse is linear (O(n))
 *
 * this implementation of removeFromParent trades space complexity (adding the .key property) for 
 * time complexity (array.splice is at worst O(n), at best O(1))
+*
 */
