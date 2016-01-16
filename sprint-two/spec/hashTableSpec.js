@@ -53,6 +53,10 @@ describe('hashTable', function() {
       var firstName = person[0], lastName = person[1];
       hashTable.insert(firstName,lastName);
     });
+    _.each(people, function(person) {
+      var firstName = person[0], lastName = person[1];
+      hashTable.insert(firstName,lastName);
+    });
     expect(hashTable._limit).to.equal(16);
   });
 

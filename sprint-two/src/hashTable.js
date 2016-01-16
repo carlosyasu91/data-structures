@@ -9,13 +9,16 @@ var HashTable = function() {
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(index) || [];
-  
-  var t = 0;
-  while(bucket[t] && k !== bucket[t][0]){
-    t++;
+ 
+  for(var i=0;i<bucket.length;i++){
+    if(bucket[i][0] === k){
+      bucket[i][1] = v;
+      return;
+    }
   }
-  bucket[t] = [k ,v];
-  
+
+  bucket.push([k,v]);
+
   this._storage.set(index, bucket);
   this._length++;
 
