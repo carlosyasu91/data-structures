@@ -1,10 +1,12 @@
-var BinarySearchTree = function(value) {
+var BinarySearchTree = function(value, depth, parent) {
   
   var newBinarySearchTree = Object.create(BinarySearchTree.prototype);
 
   newBinarySearchTree.value = value;
-  newBinarySearchTree.left = null;
-  newBinarySearchTree.right = null;
+  newBinarySearchTree.depth = depth || 0;
+  if(parent) {
+    newBinarySearchTree.parent = parent;
+  }
 
   return newBinarySearchTree;
 };
@@ -12,13 +14,13 @@ var BinarySearchTree = function(value) {
 BinarySearchTree.prototype.insert = function(value){  
   if (value > this.value) {
     if(!this.right){
-      this.right = BinarySearchTree(value);
+      this.right = BinarySearchTree(value, this.depth + 1, this);
     } else {
       this.right.insert(value);
     }
   } else {
     if(!this.left){
-      this.left = BinarySearchTree(value);
+      this.left = BinarySearchTree(value, this.depth + 1, this);
     } else {
       this.left.insert(value);
     }  
@@ -37,13 +39,31 @@ BinarySearchTree.prototype.contains = function(value){
 };
 
 BinarySearchTree.prototype.depthFirstLog = function(callback){
-  callback(this.value);
+  callback.call(this, this.value);
   if(this.left) {
     this.depthFirstLog.call(this.left, callback);
   }
   if(this.right) {
     this.depthFirstLog.call(this.right, callback);
   }
+};
+
+BinarySearchTree.prototype.breadthFirstLog = function(callback, depth){
+
+  var queue = [];
+
+  this.depthFirstLog(function(value){
+    queue[this.depth] = queue[this.depth] || [];
+    queue[this.depth].push(value);
+  });
+  
+  queue.forEach(function(depthArray){
+    depthArray.forEach(function(value){
+      callback(value);
+    });
+  });
+
+
 };
 
 /*
